@@ -5,7 +5,9 @@ input {
   border-radius: 0.8em;
   border: 1px solid #888;
   background: #ddd;
+  margin: 0.5rem;
 }
+
 
 input {
   background: white;

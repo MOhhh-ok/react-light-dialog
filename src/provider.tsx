@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { defaultClassName } from "./consts";
-import { CloserContext, OpenerContext } from './contexts';
-import { CloseFunction, LightDialogOptions, OpenFunction } from "./types";
+import { DialogContext } from './contexts';
+import { DialogOptions, DialogProps, HideFunction, ShowFunction } from "./types";
 
 export interface LightDialogProviderProps extends PropsWithChildren {
   style?: React.CSSProperties;
@@ -11,7 +11,7 @@ export interface LightDialogProviderProps extends PropsWithChildren {
 export function LightDialogProvider(props: LightDialogProviderProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const open: OpenFunction<any> = (component: React.ReactNode, options?: LightDialogOptions) => {
+  const show: ShowFunction<any> = (component: ReactNode | ((params: DialogProps<any>) => ReactNode), options?: DialogOptions) => {
     return new Promise((resolve, reject) => {
       const { type = 'popover', className } = options ?? {};
       const style = { ...props.style, ...options?.style };
@@ -32,7 +32,7 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
       dialog.addEventListener('toggle', handleToggle);
       containerRef.current?.appendChild(dialog);
 
-      const close: CloseFunction<any> = (data: any) => {
+      const hide: HideFunction<any> = (data: any) => {
         if (type === 'popover') {
           dialog.hidePopover();
         } else {
@@ -43,11 +43,11 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
 
       const root = createRoot(dialog);
       root.render(
-        <OpenerContext.Provider value={{ open }}>
-          <CloserContext.Provider value={{ close }}>
-            {component}
-          </CloserContext.Provider>
-        </OpenerContext.Provider>
+        <DialogContext.Provider value={{ show }}>
+          {/* <HideContext.Provider value={{ hide }}> */}
+          {typeof component === 'function' ? component({ hide }) : component}
+          {/* </HideContext.Provider> */}
+        </DialogContext.Provider>
       );
 
       switch (type) {
@@ -67,9 +67,9 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
     });
   }
 
-  return <OpenerContext.Provider value={{ open }}>
+  return <DialogContext.Provider value={{ show }}>
     {props.children}
     <div ref={containerRef}></div>
-  </OpenerContext.Provider>
+  </DialogContext.Provider>
 }
 

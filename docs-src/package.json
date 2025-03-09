@@ -14,7 +14,7 @@
     "@emotion/css": "^11.13.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-light-dialog": "file:../"
+    "react-light-dialog": "link:../"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -33,6 +33,9 @@
     "onlyBuiltDependencies": [
       "@swc/core",
       "esbuild"
-    ]
+    ],
+    "overrides": {
+      "react-light-dialog": "link:.."
+    }
   }
 }

@@ -9,4 +9,5 @@ export default defineConfig({
     outDir: '../docs',
     emptyOutDir: true,
   },
+  server: { watch: { usePolling: true } }
 })

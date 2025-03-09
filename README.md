@@ -36,16 +36,16 @@ function App() {
 }
 ```
 
-2. Use the `useOpener` hook to open dialogs:
+2. Use the `useDialog` hook to open dialogs:
 
 ```tsx
-import { useOpener } from 'react-light-dialog';
+import { useDialog } from 'react-light-dialog';
 
 function YourComponent() {
-  const opener = useOpener();
+  const { show } = useDialog();
 
   const openDialog = () => {
-    opener.open(
+    show(
       <div>
         <h2>Dialog Content</h2>
         <p>This is a simple dialog!</p>
@@ -58,53 +58,103 @@ function YourComponent() {
 }
 ```
 
-3. Use the `useCloser` hook inside dialog content to close it:
+3. Use `hide` method to hide dialog:
 
 ```tsx
-import { useCloser } from 'react-light-dialog';
-
-function DialogContent() {
-  const closer = useCloser();
-
-  return (
-    <div>
-      <h2>Dialog Content</h2>
-      <p>This is a simple dialog!</p>
-      <button onClick={closer.close}>Close</button>
-    </div>
-  );
+const handleNoValue = async () => {
+  const res = await show<void>(({ hide }) => <div>
+    <p>No value return</p>
+    <button onClick={() => hide()}>OK</button>
+  </div>);
+  show(JSON.stringify(res));
 }
 ```
 
-4. You can return value on dialog:
+4. Use `hide` method to hide dialog and return value:
 
 ```tsx
-import {useOpener, useCloser } from 'react-light-dialog';
-
-export function ReturnExample() {
-  const opener = useOpener();
-
-  const handleClick = async () => {
-    const res = await opener.open(<ReturnDialog defaultValue="Some value" />);
-    console.log(res); // The value returned from the dialog
-  }
-
-  return <button onClick={handleClick}>Open</button>
+const handleConfirm = async () => {
+  const res = await show<boolean>(({ hide }) => <div>
+    <p>Confirm</p>
+    <button onClick={() => hide(false)}>Cancel</button>
+    <button onClick={() => hide(true)}>OK</button>
+  </div>);
+  show(JSON.stringify(res));
 }
 
-export function ReturnDialog(props: { defaultValue: string }) {
-  const { defaultValue } = props;
-  const closer = useCloser();
-  const [value, setValue] = useState(defaultValue);
+const handleChoice = async () => {
+  const res = await show<string>(({ hide }) => <div>
+    <p>Choice</p>
+    <button onClick={() => hide('John')}>John</button>
+    <button onClick={() => hide('Anna')}>Anna</button>
+  </div>);
+  show(JSON.stringify(res));
+}
+```
+
+5. Use custom components:
+
+```tsx
+export function PromptDemo() {
+  const { show } = useDialog();
+
+  const handlePrompt = async () => {
+    const res = await show<string>((params) => <PromptDialog {...params} />);
+    show(JSON.stringify(res));
+  }
+
+  const handleMixedData = async () => {
+    const res = await show<{ name: string, age: number }>((params) => <MixedDataDialog {...params} />);
+    show(JSON.stringify(res));
+  }
+
+  const handleInitialValue = async () => {
+    const res = await show<string>((params) => <InitialValueDialog {...params} value="John" />);
+    show(JSON.stringify(res));
+  }
 
   return <div>
+    <button onClick={handlePrompt}>Input value</button>
+    <button onClick={handleMixedData}>Input mixed values</button>
+    <button onClick={handleInitialValue}>Input value with initial value</button>
+  </div>
+}
+
+function PromptDialog(props: DialogProps<string>) {
+  const [value, setValue] = useState('');
+  const { hide } = props;
+  return <div>
+    <p>Prompt</p>
     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => closer.close(undefined)}>Cancel</button>
-    <button onClick={() => closer.close(value)}>OK</button> {/* Return value on closing */}
+    <button onClick={() => hide(value)}>OK</button>
+  </div>
+}
+
+function MixedDataDialog(props: DialogProps<{ name: string, age: number }>) {
+  const { hide } = props;
+  const [name, setName] = useState('');
+  const [age, setAge] = useState(0);
+  return <div>
+    <p>Mixed data</p>
+    <br />name<br />
+    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+    <br />age<br />
+    <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
+    <br />
+    <button onClick={() => hide({ name, age })}>OK</button>
+  </div >
+}
+
+function InitialValueDialog(props: { value: string } & DialogProps<string>) {
+  const [value, setValue] = useState(props.value);
+  const { hide } = props;
+  return <div>
+    <p>Prompt with initial value</p>
+    <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+    <button onClick={() => hide(value)}>OK</button>
   </div>
 }
 ```
-
 
 ## API
 
@@ -112,7 +162,7 @@ export function ReturnDialog(props: { defaultValue: string }) {
 
 Provides the dialog context to your application.
 
-### useOpener
+### useDialog
 
 Returns an object with an `open` method that accepts:
 - `component`: React node to render inside the dialog

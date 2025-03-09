@@ -1,13 +1,8 @@
-import { createContext } from "react";
-import { CloseFunction, OpenFunction } from "./types";
+import { createContext, ReactNode } from "react";
+import { DialogOptions, DialogProps, ShowFunction } from "./types";
 
-type OpenerContextType<T> = {
-  open: OpenFunction<T>;
+export type DialogContextType = {
+  show<T>(component: ReactNode | ((params: DialogProps<T>) => ReactNode), options?: DialogOptions): Promise<T | undefined>;
 }
 
-type CloserContextType<T> = {
-  close: CloseFunction<T>;
-}
-
-export const OpenerContext = createContext<OpenerContextType<any>>(null!);
-export const CloserContext = createContext<CloserContextType<any>>(null!);
+export const DialogContext = createContext<DialogContextType>(null!);

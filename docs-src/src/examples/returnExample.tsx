@@ -1,25 +1,24 @@
 import { useState } from "react";
-import { useCloser, useOpener } from "react-light-dialog";
+import { DialogProps, useDialog } from "react-light-dialog";
 
 export function ReturnExample() {
-  const { open } = useOpener();
+  const { show } = useDialog();
 
   const handleClick = async () => {
-    const res = await open(<ReturnDialog defaultValue="Some value" />);
+    const res = await show<string | undefined>((params) => <ReturnDialog defaultValue="Some value" {...params} />);
     console.log(res); // The value returned from the dialog
   }
 
   return <button onClick={handleClick}>Open</button>
 }
 
-export function ReturnDialog(props: { defaultValue: string }) {
-  const { defaultValue } = props;
-  const { close } = useCloser();
-  const [value, setValue] = useState(defaultValue);
+export function ReturnDialog(props: { defaultValue: string } & DialogProps<string | undefined>) {
+  const { hide } = props;
+  const [value, setValue] = useState(props.defaultValue);
 
   return <div >
     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => close(undefined)}>Cancel</button>
-    <button onClick={() => close(value)}>OK</button>
+    <button onClick={() => hide(undefined)}>Cancel</button>
+    <button onClick={() => hide(value)}>OK</button>
   </div>
 }

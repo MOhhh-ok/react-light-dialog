@@ -1,11 +1,20 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
-export type LightDialogOptions = {
-  type?: 'popover' | 'modal' | 'non-modal';
+export type DialogType = 'popover' | 'modal' | 'non-modal';
+
+export type DialogOptions = {
+  type?: DialogType;
   style?: React.CSSProperties;
   className?: string;
 }
 
+export type DialogProps<T = void> = {
+  hide: HideFunction<T>;
+}
 
-export type OpenFunction<T> = (component: React.ReactNode, options?: LightDialogOptions) => Promise<T>;
-export type CloseFunction<T> = (data: T) => T;
+export type ShowFunction<T> = (
+  component: ReactNode | ((params: DialogProps<T>) => ReactNode),
+  options?: DialogOptions
+) => Promise<T>;
+
+export type HideFunction<T> = (data: T) => T;

@@ -1,10 +1,6 @@
 import { useContext } from "react";
-import { CloserContext, OpenerContext } from "./contexts";
+import { DialogContext } from "./contexts";
 
-export function useOpener() {
-  return useContext(OpenerContext);
-}
-
-export function useCloser() {
-  return useContext(CloserContext);
+export function useDialog() {
+  return useContext(DialogContext);
 }
