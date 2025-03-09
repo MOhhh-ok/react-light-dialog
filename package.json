@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsc && sass src/style.scss dist/style.css && cd docs-src && pnpm run build",
     "dev": "concurrently \"tsc --watch\" \"sass src/style.scss dist/style.css --watch\" \"cd docs-src && pnpm i && pnpm run dev\"",
+    "start": "cd docs-src && pnpm run start",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
