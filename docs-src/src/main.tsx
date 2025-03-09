@@ -6,9 +6,9 @@ import App from './App.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <LightDialogProvider>
+  <StrictMode>maintenancing...
+    {/* <LightDialogProvider>
       <App />
-    </LightDialogProvider>
+    </LightDialogProvider> */}
   </StrictMode>,
 )
