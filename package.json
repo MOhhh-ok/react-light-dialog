@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://github.com/mohhh-ok/react-simple-dialog",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [

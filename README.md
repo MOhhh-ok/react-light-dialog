@@ -1,4 +1,4 @@
-# react-simple-dialog
+# React Simple Dialog
 
 A lightweight, easy-to-use dialog library for React applications.
 
