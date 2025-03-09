@@ -22,7 +22,7 @@ npm install react-light-dialog
 
 1. Wrap your application with `LightDialogProvider` and import css:
 
-```jsx
+```tsx
 import { LightDialogProvider } from 'react-light-dialog';
 import 'react-light-dialog/style.css';
 
@@ -38,14 +38,14 @@ function App() {
 
 2. Use the `useOpener` hook to open dialogs:
 
-```jsx
+```tsx
 import { useOpener } from 'react-light-dialog';
 
 function YourComponent() {
-  const dlgs = useOpener();
+  const opener = useOpener();
 
   const openDialog = () => {
-    dlgs.open(
+    opener.open(
       <div>
         <h2>Dialog Content</h2>
         <p>This is a simple dialog!</p>
@@ -60,17 +60,17 @@ function YourComponent() {
 
 3. Use the `useCloser` hook inside dialog content to close it:
 
-```jsx
+```tsx
 import { useCloser } from 'react-light-dialog';
 
 function DialogContent() {
-  const dlgs = useCloser();
+  const closer = useCloser();
 
   return (
     <div>
       <h2>Dialog Content</h2>
       <p>This is a simple dialog!</p>
-      <button onClick={dlgs.close}>Close</button>
+      <button onClick={closer.close}>Close</button>
     </div>
   );
 }
@@ -78,14 +78,14 @@ function DialogContent() {
 
 4. You can return value on dialog:
 
-```jsx
+```tsx
 import {useOpener, useCloser } from 'react-light-dialog';
 
 export function ReturnExample() {
-  const dlgs = useOpener();
+  const opener = useOpener();
 
   const handleClick = async () => {
-    const res = await dlgs.open(<ReturnDialog defaultValue="Some value" />);
+    const res = await opener.open(<ReturnDialog defaultValue="Some value" />);
     console.log(res); // The value returned from the dialog
   }
 
@@ -94,13 +94,13 @@ export function ReturnExample() {
 
 export function ReturnDialog(props: { defaultValue: string }) {
   const { defaultValue } = props;
-  const dlgs = useCloser();
+  const closer = useCloser();
   const [value, setValue] = useState(defaultValue);
 
   return <div>
     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => dlgs.close(undefined)}>Cancel</button>
-    <button onClick={() => dlgs.close(value)}>OK</button> {/* Return value on closing */}
+    <button onClick={() => closer.close(undefined)}>Cancel</button>
+    <button onClick={() => closer.close(value)}>OK</button> {/* Return value on closing */}
   </div>
 }
 ```
