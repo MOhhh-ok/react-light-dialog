@@ -2,31 +2,23 @@ import React, { PropsWithChildren, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { DialogCloserContext, DialogOpenerContext } from './contexts';
 import { LightDialogOptions } from "./types";
-import { css } from '@emotion/css';
 
-export function LightDialogProvider(props: PropsWithChildren) {
+export interface LightDialogProviderProps extends PropsWithChildren {
+  style?: React.CSSProperties;
+}
+
+export function LightDialogProvider(props: LightDialogProviderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   function open(component: React.ReactNode, options?: LightDialogOptions) {
-    const { type = 'popover', style } = options ?? {};
+    const { type = 'popover' } = options ?? {};
+    const style = { ...props.style, ...options?.style };
     if (!containerRef.current) throw new Error('ref.current is null');
 
-
     const dialog = document.createElement('dialog');
+    dialog.className = 'light-dialog';
     dialog.popover = 'auto';
-    dialog.className = css`
-      ::backdrop {
-        background-color: rgba(0, 0, 0, 0.1);
-        }
-    `;
-
-    Object.assign(dialog.style, {
-      border: '1px solid #aaa',
-      borderRadius: '0.5rem',
-      padding: "0.8rem 1rem",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      ...style
-    });
+    Object.assign(dialog.style, style);
 
     function handleToggle(e: any) {
       if (e.newState == 'open') return;

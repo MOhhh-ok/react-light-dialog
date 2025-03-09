@@ -1,0 +1,10 @@
+dialog.light-dialog {
+  border: 1px solid #aaa;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  ::backdrop {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
