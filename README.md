@@ -7,7 +7,7 @@ Check out the [demo](https://mohhh-ok.github.io/react-light-dialog/).
 ## Installation
 
 ```
-npm install react-light-dialog @emotion/css
+npm install react-light-dialog
 ```
 
 ## Features
