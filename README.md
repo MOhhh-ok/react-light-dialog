@@ -20,10 +20,11 @@ npm install react-light-dialog @emotion/css
 
 ## Basic Usage
 
-1. Wrap your application with `LightDialogProvider`:
+1. Wrap your application with `LightDialogProvider` and import css:
 
 ```jsx
 import { LightDialogProvider } from 'react-light-dialog';
+import 'react-light-dialog/style.css';
 
 function App() {
 
