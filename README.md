@@ -75,6 +75,35 @@ function DialogContent() {
 }
 ```
 
+4. You can return value on dialog:
+
+```jsx
+import {useDialogOpener, useDialogCloser } from 'react-light-dialog';
+
+export function ReturnExample() {
+  const { open } = useDialogOpener();
+
+  const handleClick = async () => {
+    const res = await open(<ReturnDialog defaultValue="Some value" />);
+    console.log(res); // The value returned from the dialog
+  }
+
+  return <button onClick={handleClick}>Open</button>
+}
+
+export function ReturnDialog(props: { defaultValue: string }) {
+  const { defaultValue } = props;
+  const { close } = useDialogCloser();
+  const [value, setValue] = useState(defaultValue);
+
+  return <div>
+    <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+    <button onClick={() => close(undefined)}>Cancel</button>
+    <button onClick={() => close(value)}>OK</button>
+  </div>
+}
+```
+
 
 ## API
 
@@ -91,6 +120,8 @@ Returns an object with an `open` method that accepts:
 ### useDialogCloser
 
 Returns an object with a `close` method to close the current dialog.
+
+close(value: any): void
 
 ### Options
 

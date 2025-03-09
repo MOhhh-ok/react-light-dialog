@@ -25,7 +25,8 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
       function handleToggle(e: any) {
         if (e.newState == 'open') return;
         root.unmount();
-        dialog.remove()
+        dialog.remove();
+        resolve(undefined);
       }
 
       dialog.addEventListener('toggle', handleToggle);

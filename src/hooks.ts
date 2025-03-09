@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { useContext } from "react";
 import { DialogCloserContext, DialogOpenerContext } from "./contexts";
 
 export function useDialogOpener() {
