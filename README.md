@@ -164,15 +164,10 @@ Provides the dialog context to your application.
 
 ### useDialog
 
-Returns an object with an `open` method that accepts:
-- `component`: React node to render inside the dialog
+Returns an object with an `show` method that accepts:
+- `component | ({ hide }) => component`: React node to render inside the dialog
 - `options`: Optional configuration object
 
-### useCloser
-
-Returns an object with a `close` method to close the current dialog.
-
-close(value: any): void
 
 ### Options
 
@@ -180,6 +175,7 @@ close(value: any): void
 type LightDialogOptions = {
   type?: 'popover' | 'modal' | 'non-modal';
   style?: React.CSSProperties;
+  className?: string;
 }
 ```
 
