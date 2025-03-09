@@ -2,7 +2,7 @@
 
 A lightweight, easy-to-use dialog library for React applications.
 
-See the [demo](https://mohhh-ok.github.io/react-light-dialog/).
+Check out the [demo](https://mohhh-ok.github.io/react-light-dialog/).
 
 ## Installation
 

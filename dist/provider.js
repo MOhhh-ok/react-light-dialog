@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { DialogCloserContext, DialogOpenerContext } from './contexts';
 import { css } from '@emotion/css';
-export function SimpleDialogProvider(props) {
+export function LightDialogProvider(props) {
     const containerRef = useRef(null);
     function open(component, options) {
         const { type = 'popover', style } = options ?? {};
