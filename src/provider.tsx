@@ -1,13 +1,13 @@
 import React, { PropsWithChildren, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { DialogCloserContext, DialogOpenerContext } from './contexts';
-import { SimpleDialogOptions } from "./types";
+import { LightDialogOptions } from "./types";
 import { css } from '@emotion/css';
 
-export function SimpleDialogProvider(props: PropsWithChildren) {
+export function LightDialogProvider(props: PropsWithChildren) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  function open(component: React.ReactNode, options?: SimpleDialogOptions) {
+  function open(component: React.ReactNode, options?: LightDialogOptions) {
     const { type = 'popover', style } = options ?? {};
     if (!containerRef.current) throw new Error('ref.current is null');
 

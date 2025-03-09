@@ -1,11 +1,11 @@
-# React Simple Dialog
+# React Dialog Light
 
 A lightweight, easy-to-use dialog library for React applications.
 
 ## Installation
 
 ```
-npm install react-simple-dialog @emotion/css
+npm install react-light-dialog @emotion/css
 ```
 
 ## Features
@@ -18,17 +18,17 @@ npm install react-simple-dialog @emotion/css
 
 ## Basic Usage
 
-1. Wrap your application with `SimpleDialogProvider`:
+1. Wrap your application with `LightDialogProvider`:
 
 ```jsx
-import { SimpleDialogProvider } from 'react-simple-dialog';
+import { LightDialogProvider } from 'react-light-dialog';
 
 function App() {
 
   return (
-    <SimpleDialogProvider>
+    <LightDialogProvider>
       <YourApp />
-    </SimpleDialogProvider>
+    </LightDialogProvider>
   );
 }
 ```
@@ -36,7 +36,7 @@ function App() {
 2. Use the `useDialogOpener` hook to open dialogs:
 
 ```jsx
-import { useDialogOpener } from 'react-simple-dialog';
+import { useDialogOpener } from 'react-light-dialog';
 
 function YourComponent() {
   const { open } = useDialogOpener();
@@ -58,7 +58,7 @@ function YourComponent() {
 3. Use the `useDialogCloser` hook inside dialog content to close it:
 
 ```jsx
-import { useDialogCloser } from 'react-simple-dialog';
+import { useDialogCloser } from 'react-light-dialog';
 
 function DialogContent() {
   const { close } = useDialogCloser();
@@ -76,7 +76,7 @@ function DialogContent() {
 
 ## API
 
-### SimpleDialogProvider
+### LightDialogProvider
 
 Provides the dialog context to your application.
 
@@ -93,7 +93,7 @@ Returns an object with a `close` method to close the current dialog.
 ### Options
 
 ```typescript
-type SimpleDialogOptions = {
+type LightDialogOptions = {
   type?: 'popover' | 'modal' | 'non-modal';
   style?: React.CSSProperties;
 }

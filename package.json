@@ -1,10 +1,10 @@
 {
-  "name": "react-dialog-light",
+  "name": "react-light-dialog",
   "version": "0.1.0",
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/mohhh-ok/react-simple-dialog",
+  "homepage": "https://github.com/mohhh-ok/react-light-dialog",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
