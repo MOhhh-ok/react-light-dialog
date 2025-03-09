@@ -21,8 +21,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       react-light-dialog:
-        specifier: link:..
-        version: link:..
+        specifier: ^0.4.0
+        version: 0.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@eslint/js':
         specifier: ^9.21.0
@@ -993,6 +993,12 @@ packages:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
       react: ^19.0.0
+
+  react-light-dialog@0.4.0:
+    resolution: {integrity: sha512-Uv+ImeNEeNpyN7N3GeoF/QrZEWj6GFcDcklOVTTTEHW6KrcoNokxC1R+zBPOygR1x4bDadKi+aouubsg72bHuw==}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
 
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
@@ -2017,6 +2023,11 @@ snapshots:
     dependencies:
       react: 19.0.0
       scheduler: 0.25.0
+
+  react-light-dialog@0.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   react@19.0.0: {}
 
