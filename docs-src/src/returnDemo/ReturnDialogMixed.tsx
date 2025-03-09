@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDialogCloser } from "../../../dist";
+import { useDialogCloser } from "react-light-dialog";
 
 interface Props {
   payload: {

@@ -9,7 +9,7 @@ export interface LightDialogProviderProps extends PropsWithChildren {
 }
 
 export function LightDialogProvider(props: LightDialogProviderProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const open: OpenFunction<any> = (component: React.ReactNode, options?: LightDialogOptions) => {
     return new Promise((resolve, reject) => {

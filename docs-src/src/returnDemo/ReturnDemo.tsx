@@ -1,4 +1,4 @@
-import { useDialogOpener } from "../../../dist";
+import { useDialogOpener } from "react-light-dialog";
 import { ReturnDialog } from "./ReturnDialog";
 import { ReturnDialogMixed } from "./ReturnDialogMixed";
 

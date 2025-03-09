@@ -1,4 +1,4 @@
-import { useDialogCloser, useDialogOpener } from "../../../dist/index";
+import { useDialogCloser, useDialogOpener } from "react-light-dialog";
 import { TestDialog } from "./TestDialog";
 
 export function Buttons(props: { depth: number }) {
