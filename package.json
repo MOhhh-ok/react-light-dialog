@@ -5,16 +5,21 @@
     "access": "public"
   },
   "homepage": "https://github.com/mohhh-ok/react-light-dialog",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc && sass src/style.scss dist/style.css",
+    "build": "tsc && sass src/style.scss dist/style.css && cd docs-src && pnpm run build",
+    "dev": "concurrently \"tsc --watch\" \"sass src/style.scss dist/style.css --watch\" \"cd docs-src && pnpm run dev\"",
     "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -22,8 +27,9 @@
   "devDependencies": {
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "typescript": "^5.8.2",
-    "sass": "^1.85.1"
+    "concurrently": "^9.1.2",
+    "sass": "^1.85.1",
+    "typescript": "^5.8.2"
   },
   "license": "MIT"
 }

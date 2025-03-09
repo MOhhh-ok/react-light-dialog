@@ -2,12 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { SimpleDialogProvider } from 'react-simple-dialog'
+import { LightDialogProvider } from './../../dist/index';
+import './../../dist/style.css'
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <SimpleDialogProvider>
+    <LightDialogProvider>
       <App />
-    </SimpleDialogProvider>
+    </LightDialogProvider>
   </StrictMode>,
 )

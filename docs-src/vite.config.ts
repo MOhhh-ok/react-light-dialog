@@ -7,6 +7,5 @@ export default defineConfig({
   base: '/react-light-dialog/',
   build: {
     outDir: '../docs',
-
-  }
+  },
 })

@@ -1,4 +1,4 @@
-import { useDialogCloser, useDialogOpener } from "react-simple-dialog";
+import { useDialogCloser, useDialogOpener } from "./../../dist/index";
 import { TestDialog } from "./TestDialog";
 
 export function Buttons() {

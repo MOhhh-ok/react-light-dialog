@@ -1,9 +1,12 @@
-import { SimpleDialogProvider } from 'react-simple-dialog'
-import { Page } from './Page'
+import { useDialogOpener } from './../../dist/index';
+import { Buttons } from './Buttons';
 
 export default function App() {
-  return <SimpleDialogProvider>
-    <Page />
-  </SimpleDialogProvider>
+  const { open } = useDialogOpener();
+
+  return <div>
+    <h1>React Light Dialog Demo</h1>
+    <Buttons />
+  </div>
 }
 
