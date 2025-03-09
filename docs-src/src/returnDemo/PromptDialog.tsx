@@ -5,7 +5,7 @@ interface Props {
   defaultValue: string;
 }
 
-export function ReturnDialog(props: Props) {
+export function PromptDialog(props: Props) {
   const { defaultValue } = props;
   const { close } = useDialogCloser();
   const [value, setValue] = useState(defaultValue);

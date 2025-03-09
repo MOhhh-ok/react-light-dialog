@@ -42,10 +42,10 @@ function App() {
 import { useDialogOpener } from 'react-light-dialog';
 
 function YourComponent() {
-  const { open } = useDialogOpener();
+  const dlgs = useDialogOpener();
 
   const openDialog = () => {
-    open(
+    dlgs.open(
       <div>
         <h2>Dialog Content</h2>
         <p>This is a simple dialog!</p>
@@ -64,13 +64,13 @@ function YourComponent() {
 import { useDialogCloser } from 'react-light-dialog';
 
 function DialogContent() {
-  const { close } = useDialogCloser();
+  const dlgs = useDialogCloser();
 
   return (
     <div>
       <h2>Dialog Content</h2>
       <p>This is a simple dialog!</p>
-      <button onClick={close}>Close</button>
+      <button onClick={dlgs.close}>Close</button>
     </div>
   );
 }
@@ -82,10 +82,10 @@ function DialogContent() {
 import {useDialogOpener, useDialogCloser } from 'react-light-dialog';
 
 export function ReturnExample() {
-  const { open } = useDialogOpener();
+  const dlgs = useDialogOpener();
 
   const handleClick = async () => {
-    const res = await open(<ReturnDialog defaultValue="Some value" />);
+    const res = await dlgs.open(<ReturnDialog defaultValue="Some value" />);
     console.log(res); // The value returned from the dialog
   }
 
@@ -94,13 +94,13 @@ export function ReturnExample() {
 
 export function ReturnDialog(props: { defaultValue: string }) {
   const { defaultValue } = props;
-  const { close } = useDialogCloser();
+  const dlgs = useDialogCloser();
   const [value, setValue] = useState(defaultValue);
 
   return <div>
     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => close(undefined)}>Cancel</button>
-    <button onClick={() => close(value)}>OK</button>
+    <button onClick={() => dlgs.close(undefined)}>Cancel</button>
+    <button onClick={() => dlgs.close(value)}>OK</button>
   </div>
 }
 ```

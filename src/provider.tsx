@@ -12,13 +12,14 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const open: OpenFunction<any> = (component: React.ReactNode, options?: LightDialogOptions) => {
+    console.log({ options });
     return new Promise((resolve, reject) => {
-      const { type = 'popover' } = options ?? {};
+      const { type = 'popover', className } = options ?? {};
       const style = { ...props.style, ...options?.style };
       if (!containerRef.current) throw new Error('ref.current is null');
 
       const dialog = document.createElement('dialog');
-      dialog.className = defaultClassName;
+      dialog.className = [defaultClassName, className].filter(Boolean).join(' ');
       dialog.popover = 'auto';
       Object.assign(dialog.style, style);
 

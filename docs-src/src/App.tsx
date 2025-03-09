@@ -1,5 +1,6 @@
 import { NestedDemo } from './nestedDemo/NestedDemo';
 import { ReturnDemo } from './returnDemo/ReturnDemo';
+import { StylesDemo } from './stylesDemo/StylesDemo';
 
 export default function App() {
   return <div>
@@ -8,6 +9,8 @@ export default function App() {
     <NestedDemo />
     <h2>Return values demo</h2>
     <ReturnDemo />
+    <h2>Styles demo</h2>
+    <StylesDemo />
   </div>
 }
 

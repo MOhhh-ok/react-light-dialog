@@ -1,6 +1,6 @@
 {
   "name": "react-light-dialog",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "publishConfig": {
     "access": "public"
   },
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsc && sass src/style.scss dist/style.css && cd docs-src && pnpm run build",
-    "dev": "concurrently \"tsc --watch\" \"sass src/style.scss dist/style.css --watch\" \"cd docs-src && pnpm run dev\"",
+    "dev": "concurrently \"tsc --watch\" \"sass src/style.scss dist/style.css --watch\" \"cd docs-src && pnpm i && pnpm run dev\"",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
