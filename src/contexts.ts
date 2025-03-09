@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import { LightDialogOptions } from "./types";
+import { CloseFunction, OpenFunction } from "./types";
 
 type DialogOpenerContextType = {
-  open: (component: React.ReactNode, options?: LightDialogOptions) => HTMLDialogElement;
+  open: OpenFunction<any>;
 }
 
 type DialogCloserContextType = {
-  close: () => void;
+  close: CloseFunction<any>;
 }
 
 export const DialogOpenerContext = createContext<DialogOpenerContextType>(null!);
