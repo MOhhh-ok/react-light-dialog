@@ -1,6 +1,6 @@
 {
   "name": "react-light-dialog",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publishConfig": {
     "access": "public"
   },
@@ -31,5 +31,11 @@
     "sass": "^1.85.1",
     "typescript": "^5.8.2"
   },
+  "keywords": [
+    "react",
+    "dialog",
+    "modal",
+    "popover"
+  ],
   "license": "MIT"
 }
