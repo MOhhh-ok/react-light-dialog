@@ -36,13 +36,13 @@ function App() {
 }
 ```
 
-2. Use the `useDialogOpener` hook to open dialogs:
+2. Use the `useOpener` hook to open dialogs:
 
 ```jsx
-import { useDialogOpener } from 'react-light-dialog';
+import { useOpener } from 'react-light-dialog';
 
 function YourComponent() {
-  const dlgs = useDialogOpener();
+  const dlgs = useOpener();
 
   const openDialog = () => {
     dlgs.open(
@@ -58,13 +58,13 @@ function YourComponent() {
 }
 ```
 
-3. Use the `useDialogCloser` hook inside dialog content to close it:
+3. Use the `useCloser` hook inside dialog content to close it:
 
 ```jsx
-import { useDialogCloser } from 'react-light-dialog';
+import { useCloser } from 'react-light-dialog';
 
 function DialogContent() {
-  const dlgs = useDialogCloser();
+  const dlgs = useCloser();
 
   return (
     <div>
@@ -79,10 +79,10 @@ function DialogContent() {
 4. You can return value on dialog:
 
 ```jsx
-import {useDialogOpener, useDialogCloser } from 'react-light-dialog';
+import {useOpener, useCloser } from 'react-light-dialog';
 
 export function ReturnExample() {
-  const dlgs = useDialogOpener();
+  const dlgs = useOpener();
 
   const handleClick = async () => {
     const res = await dlgs.open(<ReturnDialog defaultValue="Some value" />);
@@ -94,13 +94,13 @@ export function ReturnExample() {
 
 export function ReturnDialog(props: { defaultValue: string }) {
   const { defaultValue } = props;
-  const dlgs = useDialogCloser();
+  const dlgs = useCloser();
   const [value, setValue] = useState(defaultValue);
 
   return <div>
     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
     <button onClick={() => dlgs.close(undefined)}>Cancel</button>
-    <button onClick={() => dlgs.close(value)}>OK</button>
+    <button onClick={() => dlgs.close(value)}>OK</button> {/* Return value on closing */}
   </div>
 }
 ```
@@ -112,13 +112,13 @@ export function ReturnDialog(props: { defaultValue: string }) {
 
 Provides the dialog context to your application.
 
-### useDialogOpener
+### useOpener
 
 Returns an object with an `open` method that accepts:
 - `component`: React node to render inside the dialog
 - `options`: Optional configuration object
 
-### useDialogCloser
+### useCloser
 
 Returns an object with a `close` method to close the current dialog.
 

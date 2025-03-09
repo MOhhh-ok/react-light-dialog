@@ -1,8 +1,8 @@
-import React, { PropsWithChildren, useRef } from "react";
+import React, { PropsWithChildren } from "react";
 import { createRoot } from "react-dom/client";
-import { DialogCloserContext, DialogOpenerContext } from './contexts';
-import { CloseFunction, LightDialogOptions, OpenFunction } from "./types";
 import { defaultClassName } from "./consts";
+import { CloserContext, OpenerContext } from './contexts';
+import { CloseFunction, LightDialogOptions, OpenFunction } from "./types";
 
 export interface LightDialogProviderProps extends PropsWithChildren {
   style?: React.CSSProperties;
@@ -12,7 +12,6 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const open: OpenFunction<any> = (component: React.ReactNode, options?: LightDialogOptions) => {
-    console.log({ options });
     return new Promise((resolve, reject) => {
       const { type = 'popover', className } = options ?? {};
       const style = { ...props.style, ...options?.style };
@@ -44,11 +43,11 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
 
       const root = createRoot(dialog);
       root.render(
-        <DialogOpenerContext.Provider value={{ open }}>
-          <DialogCloserContext.Provider value={{ close }}>
+        <OpenerContext.Provider value={{ open }}>
+          <CloserContext.Provider value={{ close }}>
             {component}
-          </DialogCloserContext.Provider>
-        </DialogOpenerContext.Provider>
+          </CloserContext.Provider>
+        </OpenerContext.Provider>
       );
 
       switch (type) {
@@ -68,9 +67,9 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
     });
   }
 
-  return <DialogOpenerContext.Provider value={{ open }}>
+  return <OpenerContext.Provider value={{ open }}>
     {props.children}
     <div ref={containerRef}></div>
-  </DialogOpenerContext.Provider>
+  </OpenerContext.Provider>
 }
 

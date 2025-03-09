@@ -1,13 +1,13 @@
 import { createContext } from "react";
 import { CloseFunction, OpenFunction } from "./types";
 
-type DialogOpenerContextType<T> = {
+type OpenerContextType<T> = {
   open: OpenFunction<T>;
 }
 
-type DialogCloserContextType<T> = {
+type CloserContextType<T> = {
   close: CloseFunction<T>;
 }
 
-export const DialogOpenerContext = createContext<DialogOpenerContextType<any>>(null!);
-export const DialogCloserContext = createContext<DialogCloserContextType<any>>(null!);
+export const OpenerContext = createContext<OpenerContextType<any>>(null!);
+export const CloserContext = createContext<CloserContextType<any>>(null!);
