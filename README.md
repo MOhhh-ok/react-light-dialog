@@ -1,4 +1,4 @@
-# React Dialog Light
+# React Light Dialog
 
 A lightweight, easy-to-use dialog library for React applications.
 
