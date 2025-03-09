@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDialogCloser } from "react-light-dialog";
+import { useCloser } from "react-light-dialog";
 
 interface Props {
   defaultValue: string;
@@ -7,7 +7,7 @@ interface Props {
 
 export function PromptDialog(props: Props) {
   const { defaultValue } = props;
-  const { close } = useDialogCloser();
+  const { close } = useCloser();
   const [value, setValue] = useState(defaultValue);
 
   return <div>

@@ -1,10 +1,10 @@
-import { useDialogOpener } from "react-light-dialog";
+import { useOpener } from "react-light-dialog";
 import { PromptDialog } from "./PromptDialog";
 import { ReturnDialogMixed } from "./ReturnDialogMixed";
 import { ConfirmDialog } from "./ConfirmDialog";
 
 export function ReturnDemo() {
-  const { open } = useDialogOpener();
+  const { open } = useOpener();
 
   async function handleClick1() {
     const res: string | undefined = await open(<PromptDialog defaultValue="Some value" />);

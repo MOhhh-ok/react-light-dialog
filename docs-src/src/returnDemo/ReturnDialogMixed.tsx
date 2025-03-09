@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDialogCloser } from "react-light-dialog";
+import { useCloser } from "react-light-dialog";
 
 interface Props {
   payload: {
@@ -10,7 +10,7 @@ interface Props {
 
 export function ReturnDialogMixed(props: Props) {
   const { payload } = props;
-  const { close } = useDialogCloser();
+  const { close } = useCloser();
   const [value, setValue] = useState(payload);
 
   return <div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useDialogCloser, useDialogOpener } from "../../../dist";
+import { useCloser, useOpener } from "react-light-dialog";
 
 export function ReturnExample() {
-  const { open } = useDialogOpener();
+  const { open } = useOpener();
 
   const handleClick = async () => {
     const res = await open(<ReturnDialog defaultValue="Some value" />);
@@ -14,7 +14,7 @@ export function ReturnExample() {
 
 export function ReturnDialog(props: { defaultValue: string }) {
   const { defaultValue } = props;
-  const { close } = useDialogCloser();
+  const { close } = useCloser();
   const [value, setValue] = useState(defaultValue);
 
   return <div >

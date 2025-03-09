@@ -1,10 +1,10 @@
-import { useDialogCloser, useDialogOpener } from "react-light-dialog";
+import { useCloser, useOpener } from "react-light-dialog";
 import { TestDialog } from "./TestDialog";
 
 export function Buttons(props: { depth: number }) {
   const { depth } = props;
-  const { open } = useDialogOpener();
-  const closerContext = useDialogCloser();
+  const { open } = useOpener();
+  const closerContext = useCloser();
 
   async function handleClick(type: 'popover' | 'modal' | 'non-modal') {
     const res = await open(<TestDialog payload={{ depth: depth + 1, type }} />, { type });

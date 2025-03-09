@@ -1,7 +1,7 @@
-import { useDialogCloser } from "react-light-dialog";
+import { useCloser } from "react-light-dialog";
 
 export function ConfirmDialog() {
-  const { close } = useDialogCloser();
+  const { close } = useCloser();
   return <div>
     <p>Confirm</p>
     <div style={{ display: "flex", gap: "0.5rem" }}>

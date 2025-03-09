@@ -1,7 +1,7 @@
-import { useDialogOpener } from "react-light-dialog";
+import { useOpener } from "react-light-dialog";
 
 export function StylesDemo() {
-  const dlgs = useDialogOpener();
+  const dlgs = useOpener();
 
   return <div>
     <div style={{ display: "flex", gap: "0.5rem" }}>
