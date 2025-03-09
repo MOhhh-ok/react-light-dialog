@@ -5,7 +5,7 @@ export function Page() {
   const { open } = useDialogOpener();
 
   return <div>
-    <h1>React Simple Dialog Demo</h1>
+    <h1>React Light Dialog Demo</h1>
     <Buttons />
   </div>
 }
