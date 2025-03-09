@@ -9,7 +9,7 @@ export default function App() {
     <NestedDemo />
     <h2>Return values demo</h2>
     <ReturnDemo />
-    <h2>Styles demo</h2>
+    <h2>Styled demo</h2>
     <StylesDemo />
   </div>
 }
