@@ -20,8 +20,13 @@ npm install react-light-dialog
 
 ## Basic Usage
 
+0. First, import css file:
+  
+```tsx
+import "react-light-dialog/style.css";
+```
 
-1. Most sinply, Use the `showPopover` function to open dialog:
+1. Use the `showPopover` function to open dialog:
 
 ```tsx
 import { showPopover } from "react-light-dialog";
@@ -31,7 +36,7 @@ export function Popover() {
 }
 ```
 
-2. Use `hide` method to hide dialog:
+2. Also `showModal` and `showModeless` are available. Use `hide` method to hide dialog:
 
 ```tsx
 import { showModal, showModeless } from "react-light-dialog";
