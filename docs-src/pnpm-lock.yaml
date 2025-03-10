@@ -21,8 +21,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       react-light-dialog:
-        specifier: ^0.6.0
-        version: 0.6.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^0.6.1
+        version: 0.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-syntax-highlighter:
         specifier: ^15.6.1
         version: 15.6.1(react@19.0.0)
@@ -1063,8 +1063,8 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
-  react-light-dialog@0.6.0:
-    resolution: {integrity: sha512-vL5GrtSf76KdzZApzTpCKnfb2SI0mS1/+BCX8jetDDx7vGjMjWw5ZaaGoyoncFPwCkD9fyhDQaGS3NVgNaJgHw==}
+  react-light-dialog@0.6.1:
+    resolution: {integrity: sha512-S2NkbZ+ACY5kWDvVGIHa5Qg76FRlNXtezfACyU+iQvGhCLFOsI5s0MAKzOLN+lyJ5ShlpuZpRMp/2vUgSHU8vg==}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
@@ -2175,7 +2175,7 @@ snapshots:
       react: 19.0.0
       scheduler: 0.25.0
 
-  react-light-dialog@0.6.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-light-dialog@0.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
