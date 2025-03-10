@@ -1,6 +1,6 @@
 {
   "name": "react-light-dialog",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "publishConfig": {
     "access": "public"
   },
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "concurrently": "^9.1.2",
     "sass": "^1.85.1",
     "typescript": "^5.8.2"
@@ -38,5 +39,8 @@
     "modal",
     "popover"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-syntax-highlighter": "^15.6.1"
+  }
 }

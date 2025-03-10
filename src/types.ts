@@ -8,7 +8,7 @@ export type DialogOptions = {
   className?: string;
 }
 
-export type DialogProps<T = void> = {
+export type DialogProps<T = any> = {
   hide: HideFunction<T>;
 }
 
@@ -17,4 +17,4 @@ export type ShowFunction<T> = (
   options?: DialogOptions
 ) => Promise<T>;
 
-export type HideFunction<T> = (data: T) => T;
+export type HideFunction<T = any> = (data: T) => T;

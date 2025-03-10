@@ -1,15 +1,17 @@
 import { NestedDemo } from './nestedDemo/NestedDemo';
-import { PromptDemo, SimpleReturnDemo } from './returnDemo/ReturnDemo';
+import { SimpleReturnDemo } from './returnDemo/ReturnDemo';
+import { SimpleDemo } from './simpleDemo/SimpleDemo';
 import { StylesDemo } from './stylesDemo/StylesDemo';
 
 export default function App() {
   return <div>
     <h1>React Light Dialog Demo</h1>
-    <h2>Nested demo</h2>
-    <NestedDemo />
+    <h2>Simple demo</h2>
+    <SimpleDemo />
     <h2>Return values demo</h2>
     <SimpleReturnDemo />
-    <PromptDemo />
+    <h2>Nested demo</h2>
+    <NestedDemo />
     <h2>Styled demo</h2>
     <StylesDemo />
   </div>

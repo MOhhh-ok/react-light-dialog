@@ -1,7 +1,7 @@
-import { useDialog } from "react-light-dialog";
+import { HideFunction, useDialog } from "react-light-dialog";
 import { TestDialog } from "./TestDialog";
 
-export function Buttons(props: { depth: number, hide?: () => void }) {
+export function Buttons(props: { depth: number, hide?: HideFunction | undefined }) {
   const { depth } = props;
   const { show } = useDialog();
 
