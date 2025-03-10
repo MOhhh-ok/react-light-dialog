@@ -1,8 +1,32 @@
 dialog.light-dialog {
   border: 1px solid #ddd;
   border-radius: 0.5rem;
-  padding: 0.8rem 1.4rem;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+
+  .dialog-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem 1.4rem;
+    gap: 0.5rem;
+    max-height: 80vh;
+    max-width: 80vw;
+  }
+
+  .dialog-body {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .dialog-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
 }
 
 dialog.light-dialog::backdrop {

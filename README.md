@@ -101,15 +101,18 @@ function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedD
   const { initialValue, hide } = props;
   const [name, setName] = useState(initialValue.name);
   const [age, setAge] = useState(initialValue.age);
-  return <div>
-    <p>Mixed data</p>
-    <br />name<br />
-    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-    <br />age<br />
-    <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
-    <br />
-    <button onClick={() => hide({ name, age })}>OK</button>
-  </div >
+  return <DialogContainer>
+    <DialogTitle>Mixed data</DialogTitle>
+    <DialogBody>
+      name<br />
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <br />age<br />
+      <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
+    </DialogBody>
+    <DialogFooter>
+      <button onClick={() => hide({ name, age })}>OK</button>
+    </DialogFooter>
+  </DialogContainer>
 }
 
 function MixedDataButton() {
