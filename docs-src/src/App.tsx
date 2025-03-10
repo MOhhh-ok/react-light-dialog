@@ -5,8 +5,7 @@ import { SimpleDemo } from './simpleDemo/SimpleDemo';
 import { StylesDemo } from './stylesDemo/StylesDemo';
 
 export default function App() {
-  return <div>
-    {/* <Test2 /> */}
+  return <main>
     <h1>React Light Dialog Demo</h1>
     <h2>Simple demo</h2>
     <SimpleDemo />
@@ -16,7 +15,7 @@ export default function App() {
     <NestedDemo />
     <h2>Styled demo</h2>
     <StylesDemo />
-  </div>
+  </main>
 }
 
 
