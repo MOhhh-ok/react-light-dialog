@@ -4,10 +4,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function WithCode(props: PropsWithChildren & { code: string }) {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
   return <div style={{ display: "inline-flex", flexDirection: "row", gap: "0px" }}>
     {props.children}
-    <button onClick={() => show(<SyntaxHighlighter
+    <button onClick={() => showPopover(<SyntaxHighlighter
       language="tsx"
       style={vscDarkPlus}
       showLineNumbers={true}

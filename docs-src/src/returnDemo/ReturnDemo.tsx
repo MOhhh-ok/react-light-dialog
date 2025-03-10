@@ -9,9 +9,9 @@ export function SimpleReturnDemo() {
     <WithCode
       code={`
 function Confirm() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
   const handleConfirm = async () => {
-    const confirmed = await show(({ hide }) => <div>
+    const confirmed = await showPopover(({ hide }) => <div>
       <p>Yes or No?</p>
       <button onClick={() => hide(false)}>No</button>
       <button onClick={() => hide(true)}>Yes</button>
@@ -26,9 +26,9 @@ function Confirm() {
 
     <WithCode code={`
 function Choice() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
   const handleChoice = async () => {
-    const res = await show<string>(({ hide }) => <div>
+    const res = await showPopover<string>(({ hide }) => <div>
       <p>Choice</p>
       <button onClick={() => hide('John')}>John</button>
       <button onClick={() => hide('Anna')}>Anna</button>
@@ -53,10 +53,10 @@ function PromptDialog (props: DialogProps<string>) {
 }
 
 function PromptButton() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
 
   const handlePrompt = async () => {
-    const res = await show<string>((params) => <PromptDialog {...params} />);
+    const res = await showPopover<string>((params) => <PromptDialog {...params} />);
     show("User input: " + res);
   }
 
@@ -88,12 +88,12 @@ function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedD
 }
 
 function MixedDataButton() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
 
   const handleMixedData = async () => {
     const initialValue: MixedData = { name: "John", age: 20 };
-    const res = await show<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
-    show("User input: " + JSON.stringify(res));
+    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
+    showPopover("User input: " + JSON.stringify(res));
   }
 
   return <button onClick={handleMixedData}>Input mixed values</button>
@@ -114,11 +114,11 @@ function PromptButton() {
     </div>
   }
 
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
 
   const handlePrompt = async () => {
-    const res = await show<string>((params) => <PromptDialog {...params} />);
-    show("User input: " + res);
+    const res = await showPopover<string>((params) => <PromptDialog {...params} />);
+    showPopover("User input: " + res);
   }
 
   return <button onClick={handlePrompt}>Input value</button>
@@ -145,39 +145,39 @@ function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedD
 }
 
 function MixedDataButton() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
 
   const handleMixedData = async () => {
     const initialValue: MixedData = { name: "John", age: 20 };
-    const res = await show<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
-    show("User input: " + JSON.stringify(res));
+    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
+    showPopover("User input: " + JSON.stringify(res));
   }
 
   return <button onClick={handleMixedData}>Input mixed values</button>
 }
 
-function ChoiceButton() {
-  const { show } = useDialog();
-  const handleChoice = async () => {
-    const res = await show<string>(({ hide }) => <div>
-      <p>Choice</p>
-      <button onClick={() => hide('John')}>John</button>
-      <button onClick={() => hide('Anna')}>Anna</button>
-    </div>);
-    show("User choice: " + res);
-  }
-  return <button onClick={handleChoice}>Choice</button>
-}
-
 function ConfirmButton() {
-  const { show } = useDialog();
+  const { showPopover } = useDialog();
   const handleConfirm = async () => {
-    const confirmed = await show(({ hide }) => <div>
+    const confirmed = await showPopover(({ hide }) => <div>
       <p>Yes or No?</p>
       <button onClick={() => hide(false)}>No</button>
       <button onClick={() => hide(true)}>Yes</button>
     </div>);
-    show("User confirmed: " + JSON.stringify(confirmed));
+    showPopover("User confirmed: " + JSON.stringify(confirmed));
   }
   return <button onClick={handleConfirm}>Confirm</button>
+}
+
+function ChoiceButton() {
+  const { showPopover } = useDialog();
+  const handleChoice = async () => {
+    const res = await showPopover<string>(({ hide }) => <div>
+      <p>Choice</p>
+      <button onClick={() => hide('John')}>John</button>
+      <button onClick={() => hide('Anna')}>Anna</button>
+    </div>);
+    showPopover("User choice: " + res);
+  }
+  return <button onClick={handleChoice}>Choice</button>
 }

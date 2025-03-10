@@ -2,7 +2,7 @@ import React, { PropsWithChildren, ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { defaultClassName } from "./consts";
 import { DialogContext } from './contexts';
-import { DialogOptions, DialogProps, HideFunction, ShowFunction } from "./types";
+import { DialogOptions, DialogProps, DialogType, HideFunction, ShowFunction } from "./types";
 
 export interface LightDialogProviderProps extends PropsWithChildren {
   style?: React.CSSProperties;
@@ -11,9 +11,9 @@ export interface LightDialogProviderProps extends PropsWithChildren {
 export function LightDialogProvider(props: LightDialogProviderProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const show: ShowFunction<any> = (component: ReactNode | ((params: DialogProps<any>) => ReactNode), options?: DialogOptions) => {
+  const _show = (component: ReactNode | ((params: DialogProps<any>) => ReactNode), type: DialogType, options?: DialogOptions) => {
     return new Promise((resolve, reject) => {
-      const { type = 'popover', className } = options ?? {};
+      const { className } = options ?? {};
       const style = { ...props.style, ...options?.style };
       if (!containerRef.current) throw new Error('ref.current is null');
 
@@ -43,10 +43,8 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
 
       const root = createRoot(dialog);
       root.render(
-        <DialogContext.Provider value={{ show }}>
-          {/* <HideContext.Provider value={{ hide }}> */}
+        <DialogContext.Provider value={{ show, showModal, showPopover }}>
           {typeof component === 'function' ? component({ hide }) : component}
-          {/* </HideContext.Provider> */}
         </DialogContext.Provider>
       );
 
@@ -57,7 +55,7 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
         case 'modal':
           dialog.showModal();
           break;
-        case 'non-modal':
+        case 'modeless':
           dialog.show();
           break;
         default:
@@ -67,7 +65,11 @@ export function LightDialogProvider(props: LightDialogProviderProps) {
     });
   }
 
-  return <DialogContext.Provider value={{ show }}>
+  const showPopover: ShowFunction = (component, options) => _show(component, 'popover', options);
+  const showModal: ShowFunction = (component, options) => _show(component, 'modal', options);
+  const show: ShowFunction = (component, options) => _show(component, 'modeless', options);
+
+  return <DialogContext.Provider value={{ show, showModal, showPopover }}>
     {props.children}
     <div ref={containerRef}></div>
   </DialogContext.Provider>

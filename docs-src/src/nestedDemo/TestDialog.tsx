@@ -2,7 +2,7 @@ import { DialogProps } from "react-light-dialog";
 import { Buttons } from "./Buttons";
 
 interface Payload {
-  type: 'popover' | 'modal' | 'non-modal';
+  type: 'popover' | 'modal' | 'modeless';
   depth: number;
 }
 export function TestDialog(props: { payload: Payload } & { hide?: DialogProps['hide'] }) {

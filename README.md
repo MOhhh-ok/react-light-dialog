@@ -39,101 +39,68 @@ function App() {
 2. Use the `useDialog` hook to open dialogs:
 
 ```tsx
-import { useDialog } from 'react-light-dialog';
-
-function YourComponent() {
-  const { show } = useDialog();
-
-  const openDialog = () => {
-    show(
-      <div>
-        <h2>Dialog Content</h2>
-        <p>This is a simple dialog!</p>
-      </div>,
-      { type: 'modal' }
-    );
-  };
-
-  return <button onClick={openDialog}>Open Dialog</button>;
+function PopOver() {
+  const { showPopover } = useDialog();
+  return <button onClick={() => showPopover("Hello World!")}>PopOver</button>
 }
 ```
 
 3. Use `hide` method to hide dialog:
 
 ```tsx
-const handleNoValue = async () => {
-  const res = await show<void>(({ hide }) => <div>
-    <p>No value return</p>
-    <button onClick={() => hide()}>OK</button>
-  </div>);
-  show(JSON.stringify(res));
+function Modal() {
+  const { showModal } = useDialog();
+  return <button onClick={() => showModal(({ hide }) => <button onClick={hide}>Click to close!</button>)}>Modal</button>
+}
+
+function Modeless() {
+  const { show } = useDialog();
+  return <button onClick={() => show(({ hide }) => <button onClick={hide}>Click to close!</button>)}>Modeless</button>
 }
 ```
 
 4. Use `hide` method to hide dialog and return value:
 
 ```tsx
-const handleConfirm = async () => {
-  const res = await show<boolean>(({ hide }) => <div>
-    <p>Confirm</p>
-    <button onClick={() => hide(false)}>Cancel</button>
-    <button onClick={() => hide(true)}>OK</button>
-  </div>);
-  show(JSON.stringify(res));
+function ConfirmButton() {
+  const { showPopover } = useDialog();
+  const handleConfirm = async () => {
+    const confirmed = await showPopover(({ hide }) => <div>
+      <p>Yes or No?</p>
+      <button onClick={() => hide(false)}>No</button>
+      <button onClick={() => hide(true)}>Yes</button>
+    </div>);
+    showPopover("User confirmed: " + JSON.stringify(confirmed));
+  }
+  return <button onClick={handleConfirm}>Confirm</button>
 }
 
-const handleChoice = async () => {
-  const res = await show<string>(({ hide }) => <div>
-    <p>Choice</p>
-    <button onClick={() => hide('John')}>John</button>
-    <button onClick={() => hide('Anna')}>Anna</button>
-  </div>);
-  show(JSON.stringify(res));
+function ChoiceButton() {
+  const { showPopover } = useDialog();
+  const handleChoice = async () => {
+    const res = await showPopover<string>(({ hide }) => <div>
+      <p>Choice</p>
+      <button onClick={() => hide('John')}>John</button>
+      <button onClick={() => hide('Anna')}>Anna</button>
+    </div>);
+    showPopover("User choice: " + res);
+  }
+  return <button onClick={handleChoice}>Choice</button>
 }
 ```
 
 5. Use custom components:
 
 ```tsx
-export function PromptDemo() {
-  const { show } = useDialog();
-
-  const handlePrompt = async () => {
-    const res = await show<string>((params) => <PromptDialog {...params} />);
-    show(JSON.stringify(res));
-  }
-
-  const handleMixedData = async () => {
-    const res = await show<{ name: string, age: number }>((params) => <MixedDataDialog {...params} />);
-    show(JSON.stringify(res));
-  }
-
-  const handleInitialValue = async () => {
-    const res = await show<string>((params) => <InitialValueDialog {...params} value="John" />);
-    show(JSON.stringify(res));
-  }
-
-  return <div>
-    <button onClick={handlePrompt}>Input value</button>
-    <button onClick={handleMixedData}>Input mixed values</button>
-    <button onClick={handleInitialValue}>Input value with initial value</button>
-  </div>
+interface MixedData {
+  name: string;
+  age: number;
 }
 
-function PromptDialog(props: DialogProps<string>) {
-  const [value, setValue] = useState('');
-  const { hide } = props;
-  return <div>
-    <p>Prompt</p>
-    <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => hide(value)}>OK</button>
-  </div>
-}
-
-function MixedDataDialog(props: DialogProps<{ name: string, age: number }>) {
-  const { hide } = props;
-  const [name, setName] = useState('');
-  const [age, setAge] = useState(0);
+function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedData>) {
+  const { initialValue, hide } = props;
+  const [name, setName] = useState(initialValue.name);
+  const [age, setAge] = useState(initialValue.age);
   return <div>
     <p>Mixed data</p>
     <br />name<br />
@@ -145,14 +112,16 @@ function MixedDataDialog(props: DialogProps<{ name: string, age: number }>) {
   </div >
 }
 
-function InitialValueDialog(props: { value: string } & DialogProps<string>) {
-  const [value, setValue] = useState(props.value);
-  const { hide } = props;
-  return <div>
-    <p>Prompt with initial value</p>
-    <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-    <button onClick={() => hide(value)}>OK</button>
-  </div>
+function MixedDataButton() {
+  const { showPopover } = useDialog();
+
+  const handleMixedData = async () => {
+    const initialValue: MixedData = { name: "John", age: 20 };
+    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
+    showPopover("User input: " + JSON.stringify(res));
+  }
+
+  return <button onClick={handleMixedData}>Input mixed values</button>
 }
 ```
 
@@ -164,7 +133,7 @@ Provides the dialog context to your application.
 
 ### useDialog
 
-Returns an object with an `show` method that accepts:
+Returns an object with `show`, `showModal`, `showPopover` method that accepts:
 - `component | ({ hide }) => component`: React node to render inside the dialog
 - `options`: Optional configuration object
 
@@ -173,7 +142,6 @@ Returns an object with an `show` method that accepts:
 
 ```typescript
 type LightDialogOptions = {
-  type?: 'popover' | 'modal' | 'non-modal';
   style?: React.CSSProperties;
   className?: string;
 }
