@@ -1,15 +1,14 @@
-import { HideFunction, useDialog } from "react-light-dialog";
+import { HideFunction, showModal, showModeless, showPopover } from "react-light-dialog";
 import { TestDialog } from "./TestDialog";
 
 export function Buttons(props: { depth: number, hide?: HideFunction | undefined }) {
   const { depth } = props;
-  const { showPopover, showModal, show } = useDialog();
 
   async function handleClick(type: 'popover' | 'modal' | 'modeless') {
     const fncs = {
       'popover': showPopover,
       'modal': showModal,
-      'modeless': show
+      'modeless': showModeless
     }
     const res = await fncs[type](({ hide }) => <TestDialog payload={{ depth: depth + 1, type }} hide={hide as any} />);
   }

@@ -1,4 +1,4 @@
-import { DialogBody, DialogContainer, DialogFooter, DialogTitle } from '../../src/components';
+import { DialogBody, DialogContainer, DialogFooter, DialogTitle } from 'react-light-dialog';
 import { NestedDemo } from './nestedDemo/NestedDemo';
 import { SimpleReturnDemo } from './returnDemo/ReturnDemo';
 import { SimpleDemo } from './simpleDemo/SimpleDemo';

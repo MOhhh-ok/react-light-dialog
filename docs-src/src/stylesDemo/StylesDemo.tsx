@@ -1,8 +1,6 @@
-import { useDialog } from "react-light-dialog";
+import { showPopover } from "react-light-dialog";
 
 export function StylesDemo() {
-  const { showPopover } = useDialog();
-
   return <div>
     <div style={{ display: "flex", gap: "0.5rem" }}>
       <button onClick={() => showPopover(<div>Red Background</div>, { style: { background: "red", color: "white" } })}>Red Background</button>

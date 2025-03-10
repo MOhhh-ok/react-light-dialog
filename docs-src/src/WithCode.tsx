@@ -1,10 +1,9 @@
 import { PropsWithChildren } from "react";
-import { useDialog } from "react-light-dialog";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { showPopover } from "react-light-dialog";
 
 export function WithCode(props: PropsWithChildren & { code: string }) {
-  const { showPopover } = useDialog();
   return <div style={{ display: "inline-flex", flexDirection: "row", gap: "0px" }}>
     {props.children}
     <button onClick={() => showPopover(<SyntaxHighlighter

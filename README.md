@@ -20,48 +20,36 @@ npm install react-light-dialog
 
 ## Basic Usage
 
-1. Wrap your application with `LightDialogProvider` and import css:
+
+1. Most sinply, Use the `showPopover` function to open dialog:
 
 ```tsx
-import { LightDialogProvider } from 'react-light-dialog';
-import 'react-light-dialog/style.css';
+import { showPopover } from "react-light-dialog";
 
-function App() {
-
-  return (
-    <LightDialogProvider>
-      <YourApp />
-    </LightDialogProvider>
-  );
+export function Popover() {
+  return <button onClick={() => showPopover("Hello World!")}>Popover</button>
 }
 ```
 
-2. Use the `useDialog` hook to open dialogs:
+2. Use `hide` method to hide dialog:
 
 ```tsx
-function PopOver() {
-  const { showPopover } = useDialog();
-  return <button onClick={() => showPopover("Hello World!")}>PopOver</button>
-}
-```
+import { showModal, showModeless } from "react-light-dialog";
 
-3. Use `hide` method to hide dialog:
-
-```tsx
 function Modal() {
-  const { showModal } = useDialog();
   return <button onClick={() => showModal(({ hide }) => <button onClick={hide}>Click to close!</button>)}>Modal</button>
 }
 
 function Modeless() {
-  const { show } = useDialog();
   return <button onClick={() => show(({ hide }) => <button onClick={hide}>Click to close!</button>)}>Modeless</button>
 }
 ```
 
-4. Use `hide` method to hide dialog and return value:
+3. Use `hide` method to hide dialog and return value:
 
 ```tsx
+import { showPopover } from "react-light-dialog";
+
 function ConfirmButton() {
   const { showPopover } = useDialog();
   const handleConfirm = async () => {
@@ -89,18 +77,33 @@ function ChoiceButton() {
 }
 ```
 
-5. Use custom components:
+4. Use custom components:
 
 ```tsx
+import { useState } from "react";
+import { DialogProps, DialogContainer, DialogTitle, DialogBody, DialogFooter, showPopover } from "react-light-dialog";
+
 interface MixedData {
   name: string;
   age: number;
+}
+
+export function MixedDataButton() {
+  const initialValue: MixedData = { name: "John", age: 20 };
+
+  const handleMixedData = async () => {
+    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
+    showPopover("User input: " + JSON.stringify(res));
+  }
+
+  return <button onClick={handleMixedData}>Input mixed values</button>
 }
 
 function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedData>) {
   const { initialValue, hide } = props;
   const [name, setName] = useState(initialValue.name);
   const [age, setAge] = useState(initialValue.age);
+
   return <DialogContainer>
     <DialogTitle>Mixed data</DialogTitle>
     <DialogBody>
@@ -110,33 +113,18 @@ function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedD
       <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
     </DialogBody>
     <DialogFooter>
+      <button onClick={() => hide()}>Cancel</button>
       <button onClick={() => hide({ name, age })}>OK</button>
     </DialogFooter>
   </DialogContainer>
-}
-
-function MixedDataButton() {
-  const { showPopover } = useDialog();
-
-  const handleMixedData = async () => {
-    const initialValue: MixedData = { name: "John", age: 20 };
-    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
-    showPopover("User input: " + JSON.stringify(res));
-  }
-
-  return <button onClick={handleMixedData}>Input mixed values</button>
 }
 ```
 
 ## API
 
-### LightDialogProvider
+### show functions
 
-Provides the dialog context to your application.
-
-### useDialog
-
-Returns an object with `show`, `showModal`, `showPopover` method that accepts:
+`show`, `showModal`, `showPopover` methods accepts:
 - `component | ({ hide }) => component`: React node to render inside the dialog
 - `options`: Optional configuration object
 

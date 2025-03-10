@@ -1,4 +1,3 @@
-export * from './provider';
-export * from './hooks';
+export * from './methods';
 export * from './types';
 export * from './components';
