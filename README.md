@@ -52,6 +52,7 @@ import { showPopover } from "react-light-dialog";
 
 function ConfirmButton() {
   const { showPopover } = useDialog();
+
   const handleConfirm = async () => {
     const confirmed = await showPopover(({ hide }) => <div>
       <p>Yes or No?</p>
@@ -60,11 +61,13 @@ function ConfirmButton() {
     </div>);
     showPopover("User confirmed: " + JSON.stringify(confirmed));
   }
+
   return <button onClick={handleConfirm}>Confirm</button>
 }
 
 function ChoiceButton() {
   const { showPopover } = useDialog();
+
   const handleChoice = async () => {
     const res = await showPopover<string>(({ hide }) => <div>
       <p>Choice</p>
@@ -73,6 +76,7 @@ function ChoiceButton() {
     </div>);
     showPopover("User choice: " + res);
   }
+  
   return <button onClick={handleChoice}>Choice</button>
 }
 ```
