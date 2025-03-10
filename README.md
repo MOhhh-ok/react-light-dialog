@@ -132,7 +132,7 @@ function MixedDataDialog(props: DialogProps<MixedData, MixedData>) {
 ### show functions
 
 `showModeless`, `showModal`, `showPopover` methods accepts:
-- `component | ({ hide }) => component`: React node to render inside the dialog
+- `React.Node | ({ hide }) => React.Node | [React.FC, props]`: React node to render inside the dialog
 - `options`: Optional configuration object
 
 
