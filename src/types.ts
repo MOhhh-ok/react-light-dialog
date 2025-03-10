@@ -6,10 +6,10 @@ export type DialogOptions = {
   className?: string;
 }
 
-export type DialogProps<T = any> = {
-  hide: HideFunction<T>;
+export type DialogProps<I = any, R = any> = {
+  hide: HideFunction<R>;
+  payload: I;
 }
 
-export type HideFunction<T = any> = (data?: T) => void;
-
+export type HideFunction<R = any> = (data?: R) => void;
 

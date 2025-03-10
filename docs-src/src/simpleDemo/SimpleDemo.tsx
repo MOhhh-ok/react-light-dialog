@@ -1,47 +1,22 @@
-import { showModal, showModeless, showPopover } from "react-light-dialog";
 import { WithCode } from "../WithCode";
-import { Popover } from "./demos/Popover";
-import { Modal } from "./demos/Modal";
-import { Modeless } from "./demos/Modeless";
+import { demos } from "../generated";
+import { Modal } from "../demos/Modal";
+import { Modeless } from "../demos/Modeless";
+import { Popover } from "../demos/Popover";
 
 export function SimpleDemo() {
   return <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-    <WithCode code={`
-import { showPopover } from "react-light-dialog";
-
-export function Popover() {
-  return <button onClick={() => showPopover("Hello World!")}>Popover</button>
-}
-    `}>
+    <WithCode code={demos.Popover}>
       <Popover />
     </WithCode>
 
-    <WithCode code={`
-import { showModal } from "react-light-dialog";
-
-export function Modal() {
-  return <button
-    onClick={() => showModal(({ hide }) => <button onClick={hide}>Click to close!</button>)}
-  >
-    Modal
-  </button>
-}
-    `}>
+    <WithCode code={demos.Modal}>
       <Modal />
     </WithCode>
 
-    <WithCode code={`
-import { showModeless } from "react-light-dialog";
-
-export function Modeless() {
-  return <button
-    onClick={() => showModeless(({ hide }) => <button onClick={hide}>Click to close!</button>)}
-  >
-    Modeless
-  </button>
-}
-    `}>
+    <WithCode code={demos.Modeless}>
       <Modeless />
     </WithCode>
+
   </div>
 }

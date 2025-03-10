@@ -3,16 +3,17 @@ import { DialogProps, DialogContainer, DialogTitle, DialogBody, DialogFooter, sh
 
 export function PromptButton() {
   const handlePrompt = async () => {
-    const res = await showPopover<string>((params) => <PromptDialog {...params} />);
+    const firstValue = 'Hello!';
+    const res = await showPopover([PromptDialog, firstValue]);
     showPopover("User input: " + res);
   }
 
   return <button onClick={handlePrompt}>Input value</button>
 }
 
-function PromptDialog(props: DialogProps<string>) {
-  const { hide } = props;
-  const [value, setValue] = useState('');
+function PromptDialog(props: DialogProps<string, string>) {
+  const { hide, payload } = props;
+  const [value, setValue] = useState(payload);
 
   return <DialogContainer>
     <DialogTitle>Prompt</DialogTitle>

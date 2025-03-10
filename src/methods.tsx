@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import { defaultClassName } from "./consts";
 import { DialogOptions, DialogProps, DialogType, HideFunction } from "./types";
 
-function _show<T = any>(component: ReactNode | ((params: DialogProps<any>) => ReactNode), type: DialogType, options?: DialogOptions) {
-  return new Promise<T | undefined>((resolve, reject) => {
+type FirstParam<I, R> = ReactNode | React.FC<DialogProps<I, R>> | [React.FC<DialogProps<I, R>>, I]
+
+function _show<I = any, R = any>(Component: FirstParam<I, R>, type: DialogType, options?: DialogOptions) {
+  return new Promise<R | undefined>((resolve, reject) => {
     const { className } = options ?? {};
     const style = { ...options?.style };
 
@@ -23,7 +25,7 @@ function _show<T = any>(component: ReactNode | ((params: DialogProps<any>) => Re
     dialog.addEventListener('toggle', handleToggle);
     document.body.appendChild(dialog);
 
-    const hide: HideFunction<T> = (data?: T) => {
+    const hide: HideFunction<R> = (data?: R) => {
       if (type === 'popover') {
         dialog.hidePopover();
       } else {
@@ -33,10 +35,17 @@ function _show<T = any>(component: ReactNode | ((params: DialogProps<any>) => Re
     }
 
     const root = createRoot(dialog);
-    root.render(<>
-      {typeof component === 'function' ? component({ hide }) : component}
-    </>
-    );
+
+    const cmp = (() => {
+      if (typeof Component === 'function') return <Component hide={hide} {...{} as any} />;
+      if (Array.isArray(Component)) return (() => {
+        const [Comp, params] = Component;
+        return <Comp hide={hide} payload={params} />;
+      })()
+      return Component;
+    })();
+
+    root.render(cmp);
 
     switch (type) {
       case 'popover':
@@ -55,14 +64,15 @@ function _show<T = any>(component: ReactNode | ((params: DialogProps<any>) => Re
   });
 }
 
-async function showPopover<T>(component: ReactNode | ((params: DialogProps<T>) => ReactNode), options?: DialogOptions): Promise<T | undefined> {
-  return _show<T>(component, 'popover', options);
+
+async function showPopover<I, R>(component: FirstParam<I, R>, options?: DialogOptions): Promise<R | undefined> {
+  return _show<I, R>(component, 'popover', options);
 }
-async function showModal<T>(component: ReactNode | ((params: DialogProps<T>) => ReactNode), options?: DialogOptions): Promise<T | undefined> {
-  return _show<T>(component, 'modal', options);
+async function showModal<I, R>(component: FirstParam<I, R>, options?: DialogOptions): Promise<R | undefined> {
+  return _show<I, R>(component, 'modal', options);
 }
-async function showModeless<T>(component: ReactNode | ((params: DialogProps<T>) => ReactNode), options?: DialogOptions): Promise<T | undefined> {
-  return _show<T>(component, 'modeless', options);
+async function showModeless<I, R>(component: FirstParam<I, R>, options?: DialogOptions): Promise<R | undefined> {
+  return _show<I, R>(component, 'modeless', options);
 }
 
 export { showModal, showModeless, showPopover };

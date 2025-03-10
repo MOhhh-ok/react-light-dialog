@@ -10,17 +10,17 @@ export function MixedDataButton() {
   const initialValue: MixedData = { name: "John", age: 20 };
 
   const handleMixedData = async () => {
-    const res = await showPopover<MixedData>((params) => <MixedDataDialog {...params} initialValue={initialValue} />);
+    const res = await showPopover([MixedDataDialog, initialValue]);
     showPopover("User input: " + JSON.stringify(res));
   }
 
   return <button onClick={handleMixedData}>Input mixed values</button>
 }
 
-function MixedDataDialog(props: { initialValue: MixedData } & DialogProps<MixedData>) {
-  const { initialValue, hide } = props;
-  const [name, setName] = useState(initialValue.name);
-  const [age, setAge] = useState(initialValue.age);
+function MixedDataDialog(props: DialogProps<MixedData, MixedData>) {
+  const { payload, hide } = props;
+  const [name, setName] = useState(payload.name);
+  const [age, setAge] = useState(payload.age);
 
   return <DialogContainer>
     <DialogTitle>Mixed data</DialogTitle>

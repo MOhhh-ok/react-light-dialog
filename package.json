@@ -1,6 +1,6 @@
 {
   "name": "react-light-dialog",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "publishConfig": {
     "access": "public"
   },
@@ -39,6 +39,5 @@
     "modal",
     "popover"
   ],
-  "license": "MIT",
-  "dependencies": {}
+  "license": "MIT"
 }
