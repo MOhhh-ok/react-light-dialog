@@ -1,18 +1,18 @@
 # React Light Dialog
 
-A lightweight and easy-to-use dialog library for React applications.
+軽くて簡単に使える、Reactアプリケーション用のダイアログライブラリです。
 
-The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample code.
+[デモ](https://mohhh-ok.github.io/react-light-dialog/)ページでは、サンプルコードを掲載しています。
 
 - [React Light Dialog](#react-light-dialog)
-  - [Installation](#installation)
-  - [Features](#features)
-  - [Usage](#usage)
-    - [Import CSS](#import-css)
+  - [インストール](#インストール)
+  - [特徴](#特徴)
+  - [使用方法](#使用方法)
+    - [CSSをインポート](#cssをインポート)
     - [showPopover](#showpopover)
-    - [showModal, showModeless, hide](#showmodal-showmodeless-hide)
-    - [Return values with hide](#return-values-with-hide)
-    - [Custom Dialogs](#custom-dialogs)
+    - [showModal, shoModeless, hide](#showmodal-shomodeless-hide)
+    - [hideで値を返す](#hideで値を返す)
+    - [カスタムダイアログ](#カスタムダイアログ)
   - [API](#api)
     - [show functions](#show-functions)
     - [DialogProps\<I, R\>](#dialogpropsi-r)
@@ -21,25 +21,25 @@ The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample 
   - [License](#license)
 
 
-## Installation
+## インストール
 
 ```
 npm install react-light-dialog
 ```
 
-## Features
+## 特徴
 
-- Very lightweight
-- Highly customizable
-- Supports Popover, Modal, and Modeless dialogs
-- Uses HTML dialog tag
-- Type safety with TypeScript
+- とても軽い
+- カスタマイズ範囲が広い
+- Popover, Modal, Modelessをサポート
+- HTMLのdialogタグを使用
+- TypeScriptでの型安全性
 
-## Usage
+## 使用方法
 
-### Import CSS
+### CSSをインポート
 
-First, import the CSS file.
+はじめに、CSSファイルをインポートします。
   
 ```tsx
 import "react-light-dialog/style.css";
@@ -47,7 +47,7 @@ import "react-light-dialog/style.css";
 
 ### showPopover
 
-Use the `showPopover` function to display a dialog.
+`showPopover`関数で、ダイアログを表示します。
 
 ```tsx
 import { showPopover } from "react-light-dialog";
@@ -57,9 +57,9 @@ export function Popover() {
 }
 ```
 
-### showModal, showModeless, hide
+### showModal, shoModeless, hide
 
-You can also use `showModal` and `showModeless`. To close the dialog, use the `hide` method passed in the callback.
+`showModal` と `showModeless` も使えます。ダイアログを閉じるには、コールバックで渡される `hide` メソッドを使います。
 
 ```tsx
 import { showModal, showModeless } from "react-light-dialog";
@@ -73,9 +73,9 @@ function Modeless() {
 }
 ```
 
-### Return values with hide
+### hideで値を返す
 
-The `hide` method can also return values. When you pass a value to the `hide` method, it returns it asynchronously to the showXXX function.
+`hide` メソッドは、値を返すこともできます。`hide`メソッドに値を渡すと、非同期でshowXXX関数に返します。
 
 ```tsx
 import { showPopover } from "react-light-dialog";
@@ -109,9 +109,9 @@ function ChoiceButton() {
 }
 ```
 
-### Custom Dialogs
+### カスタムダイアログ
 
-Creating custom dialogs ensures type safety. `DialogProps<I, R>` is the type that custom dialogs receive. `I` is the input type, and `R` is the return type. `I` becomes the `payload` property, and `R` is the argument of the `hide` method.
+カスタムダイアログを作成すると、型安全性を確保できます。`DialogProps<I, R>` は、カスタムダイアログが受け取る型です。`I` は入力型、`R` は返り値の型です。`I`は`payload`プロパティになり、`R`は`hide`メソッドの引数となります。
 
 ```tsx
 import { useState } from "react";
@@ -158,8 +158,8 @@ function MixedDataDialog(props: DialogProps<MixedData, MixedData>) {
 
 ### show functions
 
-You can use the `showModeless`, `showModal`, and `showPopover` methods. They take the following arguments:
-- `component: React.Node | ({ hide }) => React.Node | [React.FC, props]`: The component to render inside the dialog
+`showModeless`, `showModal`, `showPopover` メソッドが使えます。以下の引数を取ります。
+- `component: React.Node | ({ hide }) => React.Node | [React.FC, props]`: ダイアログの中に描画するコンポーネント
 - `options`: Optional configuration object
 
 
@@ -173,7 +173,7 @@ type LightDialogOptions = {
 
 ### DialogProps<I, R>
 
-This is the type that custom dialogs receive. `I` is the input type, and `R` is the return type. `I` becomes the `payload` property, and `R` is the argument of the `hide` method.
+カスタムダイアログが受け取る型です。`I` は入力型、`R` は返り値の型です。`I`は`payload`プロパティになり、`R`は`hide`メソッドの引数となります。
 
 ```tsx
 type DialogProps<I, R> = {
@@ -184,7 +184,7 @@ type DialogProps<I, R> = {
 
 ### DialogContainer, etc.
 
-The following components are available:
+以下のコンポーネントを使用できます。
 
 - `DialogContainer`
 - `DialogTitle`
@@ -212,11 +212,11 @@ function PromptDialog(props: DialogProps<string, string>) {
 
 ### CSS class
 
-- `light-dialog`: Set on the <dialog> element
-- `dialog-container`: Set on DialogContainer
-- `dialog-title`: Set on DialogTitle
-- `dialog-body`: Set on DialogBody
-- `dialog-footer`: Set on DialogFooter
+- `light-dialog`: <dialog>に設定される
+- `dialog-container`: DialogContainerに設定される
+- `dialog-title`: DialogTitleに設定される
+- `dialog-body`: DialogBodyに設定される
+- `dialog-footer`: DialogFooterに設定される
 
 ## License
 
