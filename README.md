@@ -9,6 +9,7 @@ The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample 
   - [Features](#features)
   - [Usage](#usage)
     - [Import CSS](#import-css)
+    - [Prebuilt dialogs](#prebuilt-dialogs)
     - [showPopover](#showpopover)
     - [showModal, showModeless, hide](#showmodal-showmodeless-hide)
     - [Return values with hide](#return-values-with-hide)
@@ -43,6 +44,37 @@ First, import the CSS file.
   
 ```tsx
 import "react-light-dialog/style.css";
+```
+
+### Prebuilt dialogs
+
+Simple prebuild dialogs.
+
+```tsx
+import { showModal, showPopover } from 'react-light-dialog';
+import { Alert, Confirm, Prompt } from 'react-light-dialog/dialogs';
+
+export function AlertButton() {
+  return <button onClick={() => showModal([Alert, { title: 'Hello', description: 'World!' }])}>Alert</button>
+}
+
+export function ConfirmButton() {
+  async function handleConfirm() {
+    const result = await showModal([Confirm, { title: 'Confirm', description: 'Do you want to confirm?' }]);
+    showPopover("User Confirmed: " + JSON.stringify(result));
+  }
+
+  return <button onClick={handleConfirm}>Confirm</button>
+}
+
+export function PromptButton() {
+  async function handlePrompt() {
+    const result = await showPopover([Prompt, { title: 'Input', description: 'What do you like?', value: 'cat' }]);
+    showPopover("User input: " + JSON.stringify(result));
+  }
+
+  return <button onClick={handlePrompt}>Prompt</button>
+}
 ```
 
 ### showPopover
