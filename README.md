@@ -2,9 +2,8 @@
 
 A lightweight and easy-to-use dialog library for React applications.
 
-The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample code.
-
 - [React Light Dialog](#react-light-dialog)
+  - [Demo](#demo)
   - [Installation](#installation)
   - [Features](#features)
   - [Usage](#usage)
@@ -21,6 +20,9 @@ The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample 
     - [CSS class](#css-class)
   - [License](#license)
 
+## Demo
+
+The [demo](https://mohhh-ok.github.io/react-light-dialog/) page contains sample code.
 
 ## Installation
 
